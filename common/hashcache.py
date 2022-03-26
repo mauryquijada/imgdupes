@@ -22,6 +22,7 @@ import six
 import numpy
 import scipy
 
+from common.img_decoder import get_image
 from common.spinner import Spinner
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
@@ -51,12 +52,12 @@ class HashCache:
 
 
     def gen_hash(self, img):
-        try:
-            with Image.open(img) as i:
-                hsh = self.hashfunc(i, hash_size=self.hash_size)
-                hsh = numpy.array([ 1 if b else 0 for b in hsh.hash.reshape((self.hash_bits))])
-        except:
-            hsh = numpy.array([2] * self.hash_bits)
+        # try:
+        with get_image(img) as i:
+            hsh = self.hashfunc(i, hash_size=self.hash_size)
+            hsh = numpy.array([ 1 if b else 0 for b in hsh.hash.reshape((self.hash_bits))])
+        # except:
+        #     hsh = numpy.array([2] * self.hash_bits)
         return hsh
 
 

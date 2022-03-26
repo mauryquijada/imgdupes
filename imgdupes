@@ -20,12 +20,12 @@ import sys
 
 
 def is_image(path):
-    img_file_ext = ['.png', '.PNG', '.jpg', '.JPG', '.jpeg', '.JPEG', '.gif', '.GIF']
+    img_file_ext = ['.png', '.PNG', '.jpg', '.JPG', '.jpeg', '.JPEG', '.gif', '.GIF', '.heic', 'HEIC']
     return path.suffix in img_file_ext
 
 
 def is_image_with_str(filepath):
-    img_file_ext = ['png', 'PNG', 'jpg', 'JPG', 'jpeg', 'JPEG', 'gif', 'GIF']
+    img_file_ext = ['png', 'PNG', 'jpg', 'JPG', 'jpeg', 'JPEG', 'gif', 'GIF', 'heic', 'HEIC']
     suffix = filepath.split('.')[-1]
     return suffix in img_file_ext
 

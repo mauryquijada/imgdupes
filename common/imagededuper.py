@@ -30,6 +30,7 @@ import math
 import GPUtil
 import numpy as np
 
+from common.img_decoder import get_image
 from common.imgcatutil import imgcat_for_iTerm2, create_tile_img
 from common.hashcache import HashCache
 
@@ -434,7 +435,7 @@ class ImageDeduper:
             img_filesize_dict[img] = os.path.getsize(img)
             self.duplicate_filesize_dict[img] = img_filesize_dict[img]
             try:
-                with Image.open(img) as current_img:
+                with get_image(img) as current_img:
                     width, height = current_img.size
                     img_size_dict[img] = width + height
                     img_width_dict[img] = width

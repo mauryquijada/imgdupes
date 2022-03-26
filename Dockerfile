@@ -1,4 +1,4 @@
-FROM python:3.6.8-slim-stretch
+FROM python:3.6.9-slim-buster
 
 WORKDIR /app
 
@@ -19,7 +19,7 @@ RUN git clone https://github.com/yahoojapan/NGT.git \
   && make install \
   && ldconfig \
   && cd ../python \
-  && pip install pybind11 \
+  && pip install pybind11 pybind11-global \
   && python setup.py sdist \
   && pip install dist/ngt-1.4.0.tar.gz
 
@@ -39,6 +39,11 @@ RUN git clone https://github.com/facebookresearch/faiss.git \
   && make py \
   && cd python \
   && python setup.py install
+
+RUN apt-get update -y && apt-get install -y libheif-dev
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 
 ARG VERSION
 COPY dist/imgdupes-${VERSION}.tar.gz .
